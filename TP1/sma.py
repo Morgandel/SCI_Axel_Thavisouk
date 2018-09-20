@@ -1,25 +1,19 @@
 from agent import Agent
 from environment import Environment
-from random import randint
+from random import randint,shuffle
+from tkinter import *
 
 class SMA:
 
-    def __init__(self, pSize, pNbAgent):
-        self.agentList = [Agent(randint(0,pSize-1), randint(0,pSize-1), randint(-1,-1), randint(-1,1)) for i in range (pNbAgent)]
-        self.envi = Environment(pSize, self.agentList, pNbAgent)
+    def __init__(self, pWidth, pHeight, pNbAgent):
+        self.agentList = [Agent(randint(0,pSize-1), randint(0,pSize-1), randint(-1,-1), randint(-1,1), self) for i in range (pNbAgent)]
+        self.envi = Environment(pWidth, pHeight, self.agentList, pNbAgent)
 
     def run(self, turn):
-        for i,j in enumerate(self.agentList):
-            x,y=j.getPos()
-            print(str(i)+" : ("+str(x)+","+str(y)+")")
+        for i in range(turn
+            self.agentList=shuffle(self.agentList)
+            for elem in self.agentList:
+                elem.decide()
 
-        print("\n################################\n")
-        for line in self.envi.getEnvironment():
-            for elem in line:
-                if not elem:
-                    print(str(0), end="")
-                else:
-                    print(str(1), end="")
-            print()
 
 

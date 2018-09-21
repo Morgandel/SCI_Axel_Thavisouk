@@ -2,9 +2,10 @@ from sma import SMA
 from environment import Environment
 
 if __name__ == '__main__':
-    height=5
-    width=5
-    nbAgents=1
+    height=100
+    width=100
+    circleSize=10
+    nbAgents=1000
     turn=1
-    instance=SMA(width, height, nbAgents)
+    instance=SMA(width, height, nbAgents, circleSize)
     instance.run(turn)

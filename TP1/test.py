@@ -1,7 +1,7 @@
 import tkinter as tk
 import random
 
-def move():
+def update():
     global x
     global y
     global pasX
@@ -27,7 +27,7 @@ def move():
         pasY = -10
         canvas1.coords(circle, x, y ,x+width, y+height)
 
-    window.after(333, move)
+    window.after(333, update)
 
 # --- main ---
 
@@ -60,7 +60,7 @@ for x in range(1,g_width+1, 10):
 circle = canvas1.create_oval(coord, outline="red", fill="red")
 
 
-move()
+update()
 
 window.mainloop ()
 

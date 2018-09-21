@@ -8,6 +8,7 @@ class Agent:
         self.pasX=pPasX
         self.pasY=pPasY
         self.envir=pEnvir
+        self.circle=None
 
     def getPos(self):
         return ((self.posX, self.posY))
@@ -30,16 +31,35 @@ class Agent:
     def setPosX(self, pPosX):
         self.posX=pPosX
 
-    def setPoxY(self, pPosY):
+    def setPosY(self, pPosY):
         self.posY=pPosY
     
-    def decide():
-        dest=self.envir.getAgent(self.posX+self.pasX, self.posY+self.pasY)
-        if(dest==None):
-            print("t")
+    def setCircle(self, pCircle):
+        self.circle=pCircle
 
-    def move():
+    def getCircle(self):
+        return self.circle
 
+    def setEnvir(self, pEnvir):
+        self.envir=pEnvir
+
+    def decide(self):
+        bounds=self.envir.wallBounce(self.posX+self.pasX, self.posY+self.pasY)
+        print("x:"+str(self.posX)+" y:"+str(self.posY)+" pasX:"+str(self.pasX)+" pasY:"+str(self.pasY))
+        if(bounds[0] != 0 or bounds[1]!=0):
+            if(bounds[0]!=0):
+                print("On change le pas de x "+str(self.pasX)+" à "+str(bounds[0]))
+                self.pasX=bounds[0]
+            if(bounds[1]!=0):
+                print("On change le pas de y "+str(self.pasY)+" à "+str(bounds[1]))
+                self.pasY=bounds[1]
+        else:
+            dest=self.envir.getAgent(self.posX+self.pasX, self.posY+self.pasY)
+            #if(dest==None):
+            self.move()
+
+    def move(self):
+        self.envir.moveAgent(self)
 
         
 

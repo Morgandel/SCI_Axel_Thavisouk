@@ -1,4 +1,4 @@
-from random import randint
+import config as c
 
 class Agent:
     "L'agent c'est une bille"
@@ -28,7 +28,7 @@ class Agent:
 
     def getPasY(self):
         return self.pasY
-    
+
     def setPasX(self,x):
         self.pasX=x
 
@@ -49,7 +49,7 @@ class Agent:
 
     def setEnvir(self, pEnvir):
         self.envir=pEnvir
-    
+
     def getRebound(self):
         return self.rebound
 
@@ -57,46 +57,48 @@ class Agent:
         self.rebound=self.rebound+1
         if(self.rebound>9):
             self.rebound=0
-    
+
     def isAgent(self):
         return True
 
     def decide(self,canvas):
-        bounds=self.envir.wallBounce(self.posX+self.pasX, self.posY+self.pasY)
-        #print("x:"+str(self.posX)+" y:"+str(self.posY)+" pasX:"+str(self.pasX)+" pasY:"+str(self.pasY))
-        if(bounds[0] != 0 or bounds[1]!=0):
-            if(bounds[0]!=0):
-                #print("On change le pas de x "+str(self.pasX)+" à "+str(bounds[0]))
-                self.pasX=bounds[0]
-            if(bounds[1]!=0):
-                #print("On change le pas de y "+str(self.pasY)+" à "+str(bounds[1]))
-                self.pasY=bounds[1]
-            #self.printGrid()
-            return False
+        wall=False
+        if(c.p["torus"]==0):
+            bounds=self.envir.wallBounce(self.posX+self.pasX, self.posY+self.pasY)
+            if(bounds[0] != 0 or bounds[1]!=0):
+                if(bounds[0]!=0):
+                    self.pasX=bounds[0]
+                if(bounds[1]!=0):
+                    self.pasY=bounds[1]
+                return False
+        else:
+            newPos=self.envir.torus(self.posX+self.pasX, self.posY+self.pasY)
+            wall=newPos[0]!=self.posX+self.pasX or newPos[1]!=self.posY+self.pasY
+            offsetX=self.pasX
+            offsetY=self.pasY
+            if(self.posX+self.pasX!=newPos[0]):
+                offsetX=newPos[0]-self.posX
+            if(self.posY+self.pasY!=newPos[1]):
+                offsetY=newPos[1]-self.posY
+
+        if(c.p["torus"]==1):
+            dest=self.envir.getAgent(newPos[0],newPos[1])
         else:
             dest=self.envir.getAgent(self.posX+self.pasX, self.posY+self.pasY)
-            if(dest==None):
-                self.move()
-                #self.printGrid()
-                return True
-            elif(self!=dest):
-                #dest.incRebound()
-                #self.incRebound()
-                #print("Les agent s'échange leurs pas")
-                self.agentRebound(dest)
-                self.changeColor(canvas)
-                dest.changeColor(canvas)
-                #self.printGrid()
-                return False
 
-    def printGrid(self):
-        for line in self.envir.getEnvironment():
-            for elem in line:
-                if (elem==None):
-                    print("#",end="")
-                else:
-                    print(elem.getRebound(),end="")
-            print()
+        if(dest==None):
+            if(wall):
+                self.envir.moveAgentCoord(self, newPos)
+                canvas.move(self.circle, offsetX*c.p["boxSize"], offsetY*c.p["boxSize"])
+                return False
+            self.move()
+            return True
+        elif(self!=dest):
+            self.agentRebound(dest)
+            self.changeColor(canvas)
+            dest.changeColor(canvas)
+            return False
+        return True
 
     def move(self):
         self.envir.moveAgent(self)
@@ -111,4 +113,3 @@ class Agent:
 
     def changeColor(self,canvas):
         canvas.itemconfigure(self.circle,outline="grey", fill="grey")
-        #canvas.itemconfigure(agent.getCircle,outline="grey", fill="grey")

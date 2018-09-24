@@ -12,10 +12,10 @@ class Agent:
 
     def getPos(self):
         return ((self.posX, self.posY))
-    
+
     def getPas(self):
         return ((self.pasX, self.pasY))
-    
+
     def getPosX(self):
         return self.posX
 
@@ -27,13 +27,13 @@ class Agent:
 
     def getPasY(self):
         return self.pasY
-    
+
     def setPosX(self, pPosX):
         self.posX=pPosX
 
     def setPosY(self, pPosY):
         self.posY=pPosY
-    
+
     def setCircle(self, pCircle):
         self.circle=pCircle
 
@@ -43,7 +43,7 @@ class Agent:
     def setEnvir(self, pEnvir):
         self.envir=pEnvir
 
-    def decide(self):
+    def decide(self,canvas):
         bounds=self.envir.wallBounce(self.posX+self.pasX, self.posY+self.pasY)
         print("x:"+str(self.posX)+" y:"+str(self.posY)+" pasX:"+str(self.pasX)+" pasY:"+str(self.pasY))
         if(bounds[0] != 0 or bounds[1]!=0):
@@ -53,13 +53,28 @@ class Agent:
             if(bounds[1]!=0):
                 print("On change le pas de y "+str(self.pasY)+" à "+str(bounds[1]))
                 self.pasY=bounds[1]
+            return False
         else:
             dest=self.envir.getAgent(self.posX+self.pasX, self.posY+self.pasY)
-            #if(dest==None):
-            self.move()
+            if(dest==None):
+                self.move()
+                return True
+            else:
+                self.agentRebound(dest)
+                self.changeColor(canvas,dest)
+                return False
 
     def move(self):
         self.envir.moveAgent(self)
 
-        
+    def agentRebound(self,agent):
+        selfX = self.posX
+        selfY = self.posY
+        self.posX=agent.getPosX()
+        self.posY=agent.getPosY()
+        agent.setPosX(selfX)
+        agent.setPosY(selfY)
 
+    def changeColor(self,canvas, agent):
+        canvas.itemconfigure(self.circle,outline="red", fill="red")
+        canvas.itemconfigure(agent.getCircle,outline="red", fill="red")

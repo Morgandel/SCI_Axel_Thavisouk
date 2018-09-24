@@ -12,21 +12,23 @@ class SMA:
         for agent in self.agentList:
             agent.setEnvir(self.envi)
 
-    def update(self):
+    def update(self,turn):
         for agent in self.agentList:
-            print("decision")
+            #print("decision")
             lastPos = agent.getPos()
             if(agent.decide(self.canvas1)):
                 circle=agent.getCircle()
                 self.canvas1.move(circle, agent.getPasX()*c.circleSize, agent.getPasY()*c.circleSize)
-        self.window.after(333, self.update)
+        turn=turn-1
+        if(turn>0):
+            self.window.after(33, self.updatei,turn)
 
 
     def run(self):
         g_height = (c.height*c.circleSize)+1
         g_width = (c.width*c.circleSize)+1
         self.window = Tk()
-        self.window.geometry("100x100")
+        self.window.geometry(str(g_width)+"x"+str(g_height))
 
         self.canvas1 = Canvas(self.window, height=g_height, width=g_width)
         self.canvas1.grid(row=0, column=0, sticky='w')
@@ -41,6 +43,6 @@ class SMA:
             coord=[x, y, x+c.circleSize, y+c.circleSize]
             agent.setCircle(self.canvas1.create_oval(coord, outline="red", fill="red"))
 
-        self.update()
+        self.update(c.turn)
 
         self.window.mainloop ()

@@ -1,0 +1,13 @@
+{
+  "torus": 0,
+  "gridSizeX":100,
+  "gridSizeY":100,
+  "boxSize":10,
+  "scheduling":"equitable",
+  "nbTicks":0,
+  "grid":1,
+  "trace":0,
+  "seed":"",
+  "refresh":33,
+  "nbParticules":50
+}

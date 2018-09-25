@@ -36,7 +36,7 @@ class SMA:
 
 
     def run(self):
-        g_height = (c.p["gridSizeX"]*c.p["boxSize"])+1
+        g_height = (c.p["gridSizeY"]*c.p["boxSize"])+1
         g_width = (c.p["gridSizeX"]*c.p["boxSize"])+1
         self.window = Tk()
         self.window.geometry(str(g_width)+"x"+str(g_height))

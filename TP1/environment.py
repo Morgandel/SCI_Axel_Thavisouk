@@ -1,5 +1,6 @@
 from agent import Agent
 import config as c
+from random import randint
 
 class Environment:
 
@@ -8,6 +9,10 @@ class Environment:
         for i in range(c.p["nbParticules"]):
             currentAgent=pAgentList[i]
             x,y=currentAgent.getPos()
+            while(self.envir[y][x]!=None):
+                currentAgent.setPosX(randint(0,c.p["gridSizeX"]-1))
+                currentAgent.setPosY(randint(0,c.p["gridSizeY"]-1))
+                x,y=currentAgent.getPos()
             self.envir[y][x]=currentAgent
 
     def getAgent(self,x,y):

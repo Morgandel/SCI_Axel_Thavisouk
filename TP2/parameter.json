@@ -1,0 +1,18 @@
+{
+  "torus": 0,
+  "gridSizeX":100,
+  "gridSizeY":100,
+  "boxSize":5,
+  "scheduling":"equitable",
+  "nbTicks":-1,
+  "grid":0,
+  "trace":0,
+  "seed":null,
+  "refresh":1,
+  "nbParticules":10000,
+  "fishBreedTime":3,
+  "sharkBreedTime":5,
+  "sharkStarveTime":2,
+  "nbShark":500,
+  "nbFish":1000
+}

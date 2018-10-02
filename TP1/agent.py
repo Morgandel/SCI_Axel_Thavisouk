@@ -70,6 +70,8 @@ class Agent:
                     self.pasX=bounds[0]
                 if(bounds[1]!=0):
                     self.pasY=bounds[1]
+                if(c.p["trace"]==1):
+                    print("Agent;"+str(self.posX)+";"+str(self.posY))
                 return False
         else:
             newPos=self.envir.torus(self.posX+self.pasX, self.posY+self.pasY)
@@ -110,6 +112,9 @@ class Agent:
         self.pasY=agent.getPasY()
         agent.setPasX(selfX)
         agent.setPasY(selfY)
+        if(c.p["trace"]==1):
+            print("Agent;"+str(self.posX)+";"+str(self.posY))
+            print("Agent;"+str(agent.getPosX())+";"+str(agent.getPosY()))
 
     def changeColor(self,canvas):
         canvas.itemconfigure(self.circle,outline="grey", fill="grey")

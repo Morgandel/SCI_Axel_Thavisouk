@@ -36,7 +36,7 @@ class SMA:
 
 
     def run(self):
-        g_height = (c.p["gridSizeX"]*c.p["boxSize"])+1
+        g_height = (c.p["gridSizeY"]*c.p["boxSize"])+1
         g_width = (c.p["gridSizeX"]*c.p["boxSize"])+1
         self.window = Tk()
         self.window.geometry(str(g_width)+"x"+str(g_height))
@@ -46,14 +46,12 @@ class SMA:
         if(c.p["grid"]==1):
             for x in range(1,g_width+1, c.p["boxSize"]):
                 self.canvas1.create_line(x, 1, x, g_width)
-                self.canvas1.create_line(1, x, g_width, x)
+                self.canvas1.create_line(1, x, g_height, x)
         else:
             self.canvas1.create_line(1, 1, 1, g_height)
             self.canvas1.create_line(1, 1, g_width, 1)
             self.canvas1.create_line(g_width,g_height,1,g_height)
             self.canvas1.create_line(g_width,g_height,g_width,1)
-
-
         for agent in self.agentList:
             x = agent.getPosX()*c.p["boxSize"]
             y = agent.getPosY()*c.p["boxSize"]

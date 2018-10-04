@@ -7,6 +7,7 @@ class Environment:
 
     def __init__(self):
         self.envir= [[None for x in range(c.p["gridSizeX"])] for y in range(c.p["gridSizeY"])]
+        self.moore=[None]*8
 
     def addAgents(self, pAgentList,pNbAgent):
         for i in range(pNbAgent):
@@ -43,34 +44,68 @@ class Environment:
         agent.posX = newPos[0]
         agent.posY = newPos[1]
 
+    def lookSurrounding(self,agent):
+        for i in range(-1,2):
+            for j in range(-1,2):
+                if(c.p["torus"]==1):
+                    x,y=self.torus(x,y)
+                if(not self.envir[y][x]):
+                    pass
+
     def findEmptySpace(self,agent):
-        emptySpace=[]
+        nbSpace=0
         for i in range (-1,2):
             for j in range(-1,2):
-                x=agent.posX+i
-                y=agent.posY+j
-                outOfBounds= x>=0 and x<c.p["gridSizeX"] and y>=0 and y<c.p["gridSizeY"]
-                if(outOfBounds):
-                    if(not self.envir[y][x]):
-                        emptySpace.append((x,y))
-        if(len(emptySpace)==0):
+                if((i!=0 or y!=0) and i!=j):
+                    x=agent.posX+i
+                    y=agent.posY+j
+                    if(c.p["torus"]==0):
+                        outOfBounds= x<0 or x>=c.p["gridSizeX"] or y<0 or y>=c.p["gridSizeY"]
+                    else:
+                        outOfBounds=False
+                        x,y=self.torus(x,y)
+                    if(not outOfBounds):
+                        if(not self.envir[y][x]):
+                            self.moore[nbSpace]=(x,y)
+                            nbSpace=nbSpace+1
+        if(nbSpace==0):
             return None
-        return emptySpace[randint(0,len(emptySpace)-1)]
+        return self.moore[randint(0,nbSpace-1)]
 
     def findFish(self,agent):
-        fishFounds=[]
+        nbFish=0
+        for i in range(-1,2):
+            for j in range(-1,2):
+                if((i!=0 or y!=0) and i!=j):
+                    x=agent.posX+i
+                    y=agent.posY+j
+                    if(c.p["torus"]==0):
+                        outOfBounds= x<0 or x>=c.p["gridSizeX"] or y<0 or y>=c.p["gridSizeY"]
+                    else:
+                        outOfBounds=False
+                        x,y=self.torus(x,y)
+                    if(not outOfBounds):
+                        if(self.envir[y][x]!=None):
+                            if(self.envir[y][x].canBeEaten()):
+                                self.moore[nbFish]=(x,y)
+                                nbFish=nbFish+1
+        if(nbFish==0):
+            return None
+        return self.moore[randint(0,nbFish-1)]
+
+    def agentsCanMove(self,agent):
         for i in range(-1,2):
             for j in range(-1,2):
                 x=agent.posX+i
                 y=agent.posY+j
-                outOfBounds= x>=0 and x<c.p["gridSizeX"] and y>=0 and y<c.p["gridSizeY"]
-                if(outOfBounds):
+                if(c.p["torus"]==0):
+                    outOfBounds= x<0 or x>=c.p["gridSizeX"] or y<0 or y>=c.p["gridSizeY"]
+                else:
+                    outOfBounds=False
+                    x,y=self.torus(x,y)
+                if(not outOfBounds):
                     if(self.envir[y][x]!=None):
-                        if(self.envir[y][x].canBeEaten()):
-                            fishFounds.append((x,y))
-        if(len(fishFounds)==0):
-            return None
-        return fishFounds[randint(0,len(fishFounds)-1)]
+                        self.envir[y][x].canMove=True
 
     def torus(self, posX, posY):
         pos=[posX,posY]

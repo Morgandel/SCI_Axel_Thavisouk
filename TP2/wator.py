@@ -4,6 +4,7 @@ from environment import Environment
 from random import randint,shuffle,seed
 from tkinter import *
 from display import Display
+import numpy as np
 import config as c
 
 class Wator:
@@ -20,6 +21,8 @@ class Wator:
         self.grid=None
 
     def update(self,turn):
+        if(c.p["trace"]==1):
+            print("%10d %10d %10d" % (turn,len(self.fishList), len(self.sharkList)))
         self.agentList=self.sharkList+self.fishList
         if(c.p["scheduling"]=="sequentiel"):
             agentIte=self.agentList
@@ -30,7 +33,6 @@ class Wator:
         else:
             shuffle(self.agentList)
             agentIte=self.agentList
-
 
         for agent in agentIte:
             if(agent.decide()):
@@ -47,8 +49,8 @@ class Wator:
                 self.grid.removeCircle(shark.circle)
 
         if(turn!=-1):
-            turn=turn-1
-        if(turn!=0):
+            turn=turn+1
+        if(turn!=c.p["nbTicks"] or turn==-1):
             self.grid.window.after(c.p["refresh"], self.update,turn)
 
     def changeColor(self,circle):
@@ -67,7 +69,7 @@ class Wator:
         newShark=Shark(x,y,self)
         self.sharkList.append(newShark)
         self.envir.addAgent(newShark)
-        self.grid.drawCircle(newShark,"black")
+        self.grid.drawCircle(newShark,"red")
 
     def removeAgent(self,agent):
         if(agent.isFish()):
@@ -84,6 +86,6 @@ class Wator:
         if(c.p["nbTicks"]<=0):
             self.update(-1)
         else:
-            self.update(c.p["nbTicks"])
+            self.update(0)
 
         self.grid.mainloop()

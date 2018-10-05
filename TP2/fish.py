@@ -24,6 +24,8 @@ class Fish(Agent):
                     self.breedTime=c.p["fishBreedTime"]
                 return True
             self.canMove=False
+            #if(self.breedTime==0):
+            #    self.breedTime=c.p["fishBreedTime"]
             self.breedTime=self.breedTime+1
         return False
 

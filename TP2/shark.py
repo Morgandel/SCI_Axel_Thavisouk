@@ -43,6 +43,8 @@ class Shark(Agent):
                     self.sma.addShark(newSharkX,newSharkY)
                     self.breedTime=c.p["sharkBreedTime"]
                 return True
+        #if(self.breedTime==0):
+        #    self.breedTime=c.p["sharkBreedTime"]
         self.breedTime=self.breedTime+1
         return False
 

@@ -1,8 +1,8 @@
 {
   "torus": 1,
-  "gridSizeX":100,
-  "gridSizeY":100,
-  "boxSize":10,
+  "gridSizeX":150,
+  "gridSizeY":150,
+  "boxSize":5,
   "scheduling":"equitable",
   "waterColor":"sky blue",
   "fishColor":"green",

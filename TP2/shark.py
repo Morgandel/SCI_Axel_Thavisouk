@@ -11,7 +11,6 @@ class Shark(Agent):
         self.starveTime=randint(1,c.p["sharkStarveTime"])
         self.dead=False
         self.canMove=True
-        self.moore=[None]*8
 
     def decide(self):
         theMove=self.sma.envir.findFish(self)

@@ -11,7 +11,7 @@ class Fish(Agent):
         self.canMove=True
 
     def decide(self):
-        if(not self.dead):
+        if(not self.dead and self.canMove):
             emptySpace=self.sma.envir.findEmptySpace(self)
             self.breedTime=self.breedTime-1
             if(emptySpace!=None):

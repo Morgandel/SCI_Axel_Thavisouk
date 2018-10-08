@@ -1,10 +1,12 @@
 import config as c
 from random import randint
+import numpy as np
 
 class Environment:
 
     def __init__(self):
-        self.envir= [[None for x in range(c.p["gridSizeX"])] for y in range(c.p["gridSizeY"])]
+        self.envir= np.array([[None for x in range(c.p["gridSizeX"])] for y in range(c.p["gridSizeY"])])
+
 
     def addAgents(self, pAgentList,pNbAgent):
         for i in range(pNbAgent):

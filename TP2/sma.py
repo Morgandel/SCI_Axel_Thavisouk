@@ -10,7 +10,7 @@ class SMA:
     def __init__(self):
         if(c.p["seed"]!=None):
             seed(c.p["seed"])
-        self.agentList = [Particules(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1), randint(-1,1), randint(-1,1),self) for i in range (c.p["nbParticules"])]
+        self.agentList = np.array([Particules(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1), randint(-1,1), randint(-1,1),self) for i in range (c.p["nbParticules"])])
         self.envir = Environment(self.agentList)
         self.grid=None
 

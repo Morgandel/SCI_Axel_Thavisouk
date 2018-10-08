@@ -1,8 +1,8 @@
 from wator import Wator
-from environment import Environment
+from watorEnvi import WatorEnvi
 import config as c
 
 if __name__ == '__main__':
-    c.initialize()
+    c.initializeWator()
     instance=Wator()
     instance.run()

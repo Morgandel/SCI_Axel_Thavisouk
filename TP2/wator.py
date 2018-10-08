@@ -1,6 +1,6 @@
 from shark import Shark
 from fish import Fish
-from environment import Environment
+from watorEnvi import WatorEnvi
 from random import randint,shuffle,seed
 from tkinter import *
 from display import Display
@@ -15,7 +15,7 @@ class Wator:
         self.sharkList = [Shark(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1), self) for i in range (c.p["nbShark"])]
         self.fishList = [Fish(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1), self) for i in range (c.p["nbFish"])]
         self.agentList=self.sharkList+self.fishList
-        self.envir = Environment()
+        self.envir = WatorEnvi()
         self.envir.addAgents(self.sharkList,c.p["nbShark"])
         self.envir.addAgents(self.fishList,c.p["nbFish"])
         self.grid=None
@@ -63,13 +63,13 @@ class Wator:
         newFish=Fish(x, y, self)
         self.fishList.append(newFish)
         self.envir.addAgent(newFish)
-        self.grid.drawCircle(newFish,"blue")
+        self.grid.drawCircle(newFish,c.p["newFishColor"])
 
     def addShark(self,x,y):
         newShark=Shark(x,y,self)
         self.sharkList.append(newShark)
         self.envir.addAgent(newShark)
-        self.grid.drawCircle(newShark,"red")
+        self.grid.drawCircle(newShark,c.p["newSharkColor"])
 
     def removeAgent(self,agent):
         if(agent.isFish()):
@@ -81,8 +81,8 @@ class Wator:
 
     def run(self):
         self.grid = Display()
-        self.grid.drawCircles(self.fishList, "blue")
-        self.grid.drawCircles(self.sharkList, "black")
+        self.grid.drawCircles(self.fishList, c.p["fishColor"])
+        self.grid.drawCircles(self.sharkList, c.p["sharkColor"])
         if(c.p["nbTicks"]<=0):
             self.update(-1)
         else:

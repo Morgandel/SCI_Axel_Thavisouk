@@ -1,0 +1,22 @@
+{
+  "torus": 1,
+  "gridSizeX":100,
+  "gridSizeY":100,
+  "boxSize":10,
+  "scheduling":"equitable",
+  "waterColor":"sky blue",
+  "fishColor":"green",
+  "sharkColor":"red",
+  "newFishColor":"gold",
+  "newSharkColor":"pink",
+  "nbTicks":1000,
+  "grid":0,
+  "trace":0,
+  "seed":null,
+  "refresh":1,
+  "fishBreedTime":3,
+  "sharkBreedTime":6,
+  "sharkStarveTime":2,
+  "nbShark":100,
+  "nbFish":1000
+}

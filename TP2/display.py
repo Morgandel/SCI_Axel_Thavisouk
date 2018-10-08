@@ -1,5 +1,4 @@
 from particules import Particules
-from environment import Environment
 from random import randint,shuffle,seed
 from tkinter import *
 import config as c
@@ -12,7 +11,7 @@ class Display:
         self.window = Tk()
         self.window.geometry(str(self.g_width)+"x"+str(self.g_height))
 
-        self.canvas = Canvas(self.window, height=self.g_height, width=self.g_width)
+        self.canvas = Canvas(self.window, height=self.g_height, width=self.g_width, background=c.p["waterColor"])
         self.canvas.grid(row=0, column=0, sticky='w')
         self.drawGrid()
 
@@ -31,14 +30,12 @@ class Display:
         for agent in agentList:
             x = agent.posX*c.p["boxSize"]
             y = agent.posY*c.p["boxSize"]
-            coord=[x, y, x+c.p["boxSize"], y+c.p["boxSize"]]
-            agent.circle = self.canvas.create_oval(coord, outline=color, fill=color)
+            agent.circle = self.canvas.create_oval(x, y, x+c.p["boxSize"], y+c.p["boxSize"], outline=color, fill=color)
 
     def drawCircle(self,agent,color):
         x = agent.posX*c.p["boxSize"]
         y = agent.posY*c.p["boxSize"]
-        coord=[x, y, x+c.p["boxSize"], y+c.p["boxSize"]]
-        agent.circle = self.canvas.create_oval(coord, outline=color, fill=color)
+        agent.circle = self.canvas.create_oval([x, y, x+c.p["boxSize"], y+c.p["boxSize"]], outline=color, fill=color)
     def changeColor(self,circle):
         self.canvas.itemconfigure(circle,outline="grey", fill="grey")
 
@@ -48,8 +45,7 @@ class Display:
     def moveCircleCoords(self,circle, posX, posY):
         x = posX*c.p["boxSize"]
         y = posY*c.p["boxSize"]
-        coord=[x, y, x+c.p["boxSize"], y+c.p["boxSize"]]
-        self.canvas.coords(circle,coord)
+        self.canvas.coords(circle,x, y, x+c.p["boxSize"], y+c.p["boxSize"])
 
     def removeCircle(self,circle):
         self.canvas.delete(circle)

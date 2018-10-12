@@ -19,7 +19,6 @@ class Shark(Agent):
         newSharkX=self.posX
         newSharkY=self.posY
         if(theMove!=None):
-            #self.sma.envir.agentsCanMove(self)
             fishToEat=self.sma.envir.getAgent(theMove[0],theMove[1])
             fishToEat.dead=True
             self.sma.envir.moveAgentCoord(self, theMove)
@@ -34,7 +33,6 @@ class Shark(Agent):
                 return False
             emptySpace=self.sma.envir.findEmptySpace(self)
             if(emptySpace!=None):
-                #self.sma.envir.agentsCanMove(self)
                 newSharkX=self.posX
                 newSharkY=self.posY
                 self.sma.envir.moveAgentCoord(self, emptySpace)

@@ -37,6 +37,11 @@ class Environment:
         agent.posX = x+pasX
         agent.posY = y+pasY
 
+    def isOutOfBound(self,x,y):
+        if(x<0 or x>=c.p["gridSizeX"] or y<0 or y>=c.p["gridSizeY"]):
+            return True
+        return False
+
     def moveAgentCoord(self, agent, newPos):
         self.envir[agent.posY][agent.posX]=None
         self.envir[newPos[1]][newPos[0]]=agent

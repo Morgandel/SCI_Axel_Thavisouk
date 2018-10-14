@@ -32,6 +32,12 @@ class Display:
             y = agent.posY*c.p["boxSize"]
             agent.circle = self.canvas.create_oval(x, y, x+c.p["boxSize"], y+c.p["boxSize"], outline=color, fill=color)
 
+    def drawRectangles(self,agentList,color):
+        for agent in agentList:
+            x = agent.posX*c.p["boxSize"]
+            y = agent.posY*c.p["boxSize"]
+            agent.circle = self.canvas.create_rectangle(x, y, x+c.p["boxSize"], y+c.p["boxSize"], outline=color, fill=color)
+
     def drawCircle(self,agent,color):
         x = agent.posX*c.p["boxSize"]
         y = agent.posY*c.p["boxSize"]
@@ -52,3 +58,6 @@ class Display:
 
     def mainloop(self):
         self.window.mainloop()
+
+    def listen(self,f):
+        self.window.bind('<KeyPress>', f)

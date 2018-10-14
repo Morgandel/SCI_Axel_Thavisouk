@@ -1,5 +1,18 @@
 from asyncio import *
 
+from tkinter import *
+
+wn = Tk()
+wn.title('KeyDetect')
+
+def down(e):
+    print (e.keysym.lower())
+
+wn.bind('<KeyPress>', down)
+
+wn.mainloop()
+
+print("test")
 gridx=5
 gridy=5
 grid=[[None for x in range(gridx)] for y in range(gridy)]

@@ -1,7 +1,7 @@
 {
   "torus": 0,
-  "gridSizeX":100,
-  "gridSizeY":100,
+  "gridSizeX":50,
+  "gridSizeY":50,
   "boxSize":10,
   "scheduling":"equitable",
   "waterColor":"sky blue",
@@ -19,7 +19,11 @@
   "sharkStarveTime":2,
   "nbShark":10,
   "nbFish":1000,
-  "nbTurnHunter":5,
+  "speedHunter":5,
+  "speedAvatar":1,
   "nbHunter":1,
-  "nbWall":3000
+  "nbWall":500,
+  "defenderLife":100,
+  "invincibility":30
+
 }

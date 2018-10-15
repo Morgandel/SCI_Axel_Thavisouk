@@ -1,6 +1,5 @@
 import config as c
 from agent import Agent
-from pynput import keyboard
 
 
 class Wall(Agent):

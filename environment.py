@@ -19,7 +19,12 @@ class Environment:
             self.envir[y][x]=currentAgent
 
     def addAgent(self, pAgent):
-        self.envir[pAgent.posY][pAgent.posX]=pAgent
+        x,y=(pAgent.posX,pAgent.posY)
+        while(self.envir[y][x]!=None):
+            pAgent.posX=randint(0,c.p["gridSizeX"]-1)
+            pAgent.posY=randint(0,c.p["gridSizeY"]-1)
+            x,y=(pAgent.posX,pAgent.posY)
+        self.envir[y][x]=pAgent
 
     def getAgent(self,x,y):
         return self.envir[y][x]

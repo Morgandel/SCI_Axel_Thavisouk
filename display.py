@@ -42,8 +42,8 @@ class Display:
         x = agent.posX*c.p["boxSize"]
         y = agent.posY*c.p["boxSize"]
         agent.circle = self.canvas.create_oval([x, y, x+c.p["boxSize"], y+c.p["boxSize"]], outline=color, fill=color)
-    def changeColor(self,circle):
-        self.canvas.itemconfigure(circle,outline="grey", fill="grey")
+    def changeColor(self,circle,color):
+        self.canvas.itemconfigure(circle,outline=color, fill=color)
 
     def moveCircle(self,circle,offsetX,offsetY):
         self.canvas.move(circle, offsetX*c.p["boxSize"], offsetY*c.p["boxSize"])

@@ -1,15 +1,15 @@
 {
   "torus": 0,
-  "gridSizeX":50,
-  "gridSizeY":50,
-  "boxSize":10,
+  "gridSizeX":650,
+  "gridSizeY":350,
+  "boxSize":3,
   "scheduling":"equitable",
   "waterColor":"sky blue",
   "fishColor":"green",
   "sharkColor":"red",
   "newFishColor":"gold",
   "newSharkColor":"pink",
-  "nbTicks":1000,
+  "nbTicks":-1,
   "grid":0,
   "trace":0,
   "seed":null,
@@ -19,11 +19,12 @@
   "sharkStarveTime":2,
   "nbShark":10,
   "nbFish":1000,
-  "speedHunter":5,
+  "speedHunter":1000,
   "speedAvatar":1,
-  "nbHunter":1,
-  "nbWall":500,
-  "defenderLife":100,
-  "invincibility":30
+  "nbHunter":30,
+  "nbWall":0,
+  "defenderLife":200,
+  "invincibility":30,
+  "maze":1
 
 }

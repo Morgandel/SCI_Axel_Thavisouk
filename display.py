@@ -11,7 +11,7 @@ class Display:
         self.window = Tk()
         self.window.geometry(str(self.g_width)+"x"+str(self.g_height))
 
-        self.canvas = Canvas(self.window, height=self.g_height, width=self.g_width, background=c.p["waterColor"])
+        self.canvas = Canvas(self.window, height=self.g_height, width=self.g_width)
         self.canvas.grid(row=0, column=0, sticky='w')
         self.drawGrid()
 

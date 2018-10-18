@@ -71,39 +71,3 @@ class Avatar(Agent):
 
     def type(self):
         return 'avatar'
-
-    def onPress(self,e):
-        key=e.keysym.lower()
-        if(key=="up"):
-            self.dirY=-1
-            self.dirX=0
-        elif(key=="down"):
-            self.dirY=1
-            self.dirX=0
-        elif(key=="left"):
-            self.dirY=0
-            self.dirX=-1
-        elif(key=="right"):
-            self.dirY=0
-            self.dirX=1
-        elif(key=="z"):
-            c.p["speedHunter"]+=1
-            print("Vitesse du hunter à "+str(c.p["speedHunter"]))
-        elif(key=="a"):
-            if(c.p["speedHunter"]>1):
-                c.p["speedHunter"]-=1
-            print("Vitesse du hunter à "+str(c.p["speedHunter"]))
-        elif(key=="w"):
-            if(c.p["refresh"]>1):
-                c.p["refresh"]-=1
-            print("Vitesse du jeu à "+str(c.p["refresh"]))
-        elif(key=="x"):
-            c.p["refresh"]+=1
-            print("Vitesse du jeu à "+str(c.p["refresh"]))
-        elif(key=="o"):
-            if(c.p["speedAvatar"]>1):
-                c.p["speedAvatar"]-=1
-            print("Vitesse de l'avatar à "+str(c.p["speedAvatar"]))
-        elif(key=="p"):
-            c.p["speedAvatar"]+=1
-            print("Vitesse de l'avatar à "+str(c.p["speedAvatar"]))

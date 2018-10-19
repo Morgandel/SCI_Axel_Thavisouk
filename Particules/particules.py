@@ -1,11 +1,10 @@
 import config as c
-from agent import Agent
+from Core.agent import Core.Agent
 
 class Particules(Agent):
     "L'agent c'est une bille"
     def __init__(self, pPosX, pPosY, pPasX, pPasY, pSMA):
-        self.posX=pPosX
-        self.posY=pPosY
+        super().__init__(pPosX, pPosY, pSMA)
         self.pasX=pPasX
         self.pasY=pPasY
         self.sma=pSMA

@@ -1,8 +1,8 @@
-from fish import Fish
-from shark import Shark
-import config as c
+from Wator.fish import Fish
+from Wator.shark import Shark
+import Core.config as c
 from random import randint
-from environment import Environment
+from Core.environment import Environment
 
 class WatorEnvi(Environment):
 

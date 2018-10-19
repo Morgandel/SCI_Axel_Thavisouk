@@ -16,6 +16,6 @@
   "defenderLife":200,
   "invincibility":30,
   "maze":1,
-  "erosionLabyrinthe":0.5
+  "erosionLabyrinthe":0.2
 
 }

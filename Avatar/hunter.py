@@ -1,6 +1,6 @@
 import Core.config as c
 #from Avatar.avatar import Avatar
-from agent import Agent
+from Core.agent import Agent
 
 class Hunter(Agent):
     "L'agent c'est une bille"

@@ -1,13 +1,13 @@
 from random import randint,shuffle,seed
 from tkinter import *
-from avatar import Avatar
-from hunter import Hunter
-from winner import Winner
-from wall import Wall
-from display import Display
-from environment import Environment
-from defender import Defender
-import config as c
+from Avatar.avatar import Avatar
+from Avatar.hunter import Hunter
+from Avatar.winner import Winner
+from Avatar.wall import Wall
+from Core.display import Display
+from Core.environment import Environment
+from Avatar.defender import Defender
+import Core.config as c
 import numpy as np
 
 class MotionPlanning:

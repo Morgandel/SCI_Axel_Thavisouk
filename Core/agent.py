@@ -1,4 +1,4 @@
-import config as c
+import Core.config as c
 
 
 class Agent:

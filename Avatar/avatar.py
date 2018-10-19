@@ -1,6 +1,6 @@
-import config as c
-from agent import Agent
-from wall import Wall
+import Core.config as c
+from Core.agent import Agent
+from Avatar.wall import Wall
 import numpy as np
 
 
@@ -17,8 +17,8 @@ class Avatar(Agent):
 
     def decide(self):
         self.turnCount-=1
-        if(self.turnCount<=0):
-            self.turnCount=c.p["speedAvatar"]
+        if(self.turnCount <= 0):
+            self.turnCount = c.p["speedAvatar"]
             if(self.invincibility>0):
                 self.invincibility-=1
                 if(self.invincibility==0):

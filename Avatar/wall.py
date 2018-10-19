@@ -1,11 +1,11 @@
-import config as c
-from agent import Agent
+import Core.config as c
+from Core.agent import Agent
 
 
 class Wall(Agent):
     "L'agent c'est une bille"
     def __init__(self, pPosX, pPosY, pSMA):
-        super().__init__(pPosX,pPosY, pSMA)
+        super().__init__(pPosX, pPosY, pSMA)
 
     def decide(self):
         return False

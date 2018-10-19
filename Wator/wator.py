@@ -1,11 +1,11 @@
-from shark import Shark
-from fish import Fish
-from watorEnvi import WatorEnvi
+from Wator.shark import Shark
+from Wator.fish import Fish
+from Wator.watorEnvi import WatorEnvi
 from random import randint,shuffle,seed
 from tkinter import *
-from display import Display
+from Core.display import Display
 import numpy as np
-import config as c
+import Core.config as c
 
 class Wator:
 

@@ -1,5 +1,5 @@
-import config as c
-from avatar import Avatar
+import Core.config as c
+#from Avatar.avatar import Avatar
 from agent import Agent
 
 class Hunter(Agent):

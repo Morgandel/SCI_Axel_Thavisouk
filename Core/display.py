@@ -1,7 +1,6 @@
-from particules import Particules
 from random import randint,shuffle,seed
 from tkinter import *
-import config as c
+import Core.config as c
 
 class Display:
 

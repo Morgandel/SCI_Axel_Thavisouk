@@ -1,5 +1,5 @@
-import config as c
-from agent import Agent
+import Core.config as c
+from Core.agent import Agent
 
 
 class Defender(Agent):

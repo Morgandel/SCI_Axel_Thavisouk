@@ -7,7 +7,6 @@ class Agent:
         self.posX=pPosX
         self.posY=pPosY
         self.sma=pSMA
-        self.circle=None
 
     '''
     decide() est une fonction qui est disponibles pour tout les agents et qui permet de décider une action.

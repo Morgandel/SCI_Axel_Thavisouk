@@ -30,9 +30,6 @@ class Fish(Agent):
     def type(self):
         return "fish"
 
-    def move(self):
-        self.sma.envir.moveAgent(self)
-
     def canBeEaten(self):
         if(not self.dead):
             return True

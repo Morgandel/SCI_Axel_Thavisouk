@@ -7,7 +7,6 @@ class Particules(Agent):
         super().__init__(pPosX, pPosY, pSMA)
         self.pasX=pPasX
         self.pasY=pPasY
-        self.circle=None
         self.rebound=0
 
     def decide(self):

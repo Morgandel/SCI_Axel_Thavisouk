@@ -1,7 +1,7 @@
-from Avatar.motionPlanning import MotionPlanning
+from Avatar.pacman import Pacman
 import Core.config as c
 
 if __name__ == '__main__':
     c.initialize('Avatar/maze.json')
-    theSma = MotionPlanning()
+    theSma = Pacman()
     theSma.run()

@@ -27,7 +27,7 @@ set ylabel 'Poissons'
 set y2label 'Requins'                          # y-axis label
 
 set yrange [0:15000]
-set y2range [0:3500]
+set y2range [0:3200]
 set y2tics nomirror
 set ytics nomirror
 

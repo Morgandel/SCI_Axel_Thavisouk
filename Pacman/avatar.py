@@ -5,7 +5,7 @@ import numpy as np
 
 
 class Avatar(Agent):
-    "L'agent c'est une bille"
+    "Extension de Agent pour l'agent Avatar"
     def __init__(self, pPosX, pPosY, pSMA):
         super().__init__(pPosX,pPosY, pSMA)
         self.dirX = 0
@@ -65,9 +65,6 @@ class Avatar(Agent):
                 dest.dead=True
             return True
         return False
-
-    def getNeibourgh(self):
-        return np.array([(self.posX+1,self.posY),(self.posX-1,self.posY),(self.posX,self.posY+1),(self.posX,self.posY-1)])
 
     def type(self):
         return 'avatar'

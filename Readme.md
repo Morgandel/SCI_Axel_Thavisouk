@@ -36,10 +36,10 @@ Il est préférable d'initialiser les différents compteurs de manière aléatoi
 ####Question 2
 Lorsque l'on fixe une action par tick on bloque lorsque la grille est remplie de poissons car il ne peuvent plus se reproduire car les poissons se seront reproduits là où les requins étaient avant
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+Se reproduire en bougeant donne le meilleur résultat, ils donnent aux requins une meilleure survie et les poissons se reproduisent assez rapidement aussi, on voit sur la courbe d'evolution que les poissons ont l'air de se stabiliser un peu mieux sur la fin
+![alt text](./images/evolution_bouge.png)
+![alt text](./images/fish_shark_bouge.png)
 
-
-Se reproduire en bougeant donne le meilleur résultat, ils donnent aux requins une meilleure survie et les poissons se reproduisent assez rapidement aussi
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+Se reproduire en mangeant ne permet pas aux poissons de stabiliser leurs populations comme le faisait le comportement précédent
+![alt text](./images/mange.png)
+![alt text](./images/fish_shark_mange.png)

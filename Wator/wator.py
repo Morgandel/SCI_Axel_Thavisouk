@@ -9,7 +9,7 @@ import numpy as np
 import Core.config as c
 
 class Wator(SMACore):
-    
+    "Implémentation de la classe abstraite SMACore pour réaliser Wator"
     def __init__(self):
         super().__init__()
         if(c.p["seed"]!=None):
@@ -43,36 +43,54 @@ class Wator(SMACore):
                 self.fishList.remove(fish)
                 self.envir.removeAgent(fish)
                 self.grid.removeCircle(self.circles[fish])
+                del self.circles[fish]
         for shark in self.sharkList:
             if(shark.dead):
                 self.sharkList.remove(shark)
                 self.envir.removeAgent(shark)
                 self.grid.removeCircle(self.circles[shark])
+                del self.circles[shark]
 
         if(turn!=-1):
             turn=turn+1
         if(turn!=c.p["nbTicks"] or turn==-1):
             self.grid.window.after(c.p["refresh"], self.update,turn)
 
+    '''
+    x: la coordonnée x du nouveau poisson
+    y: la coordonnée y du nouveau poisson
+    Fonction qui crée un nouveau poisson, le rajoute à sa liste, dans l'environement et qui crée le cercle pour l'afficher"
+    '''
     def addFish(self,x,y):
         newFish=Fish(x, y, self)
         self.fishList.append(newFish)
         self.envir.addAgent(newFish)
         self.addCircle(newFish,c.p["newFishColor"])
 
+    '''
+    x: la coordonnée x du nouveau requin
+    y: la coordonnée y du nouveau requin
+    Fonction qui crée un nouveau requin, le rajoute à sa liste, dans l'environement et qui crée le cercle pour l'afficher"
+    '''
     def addShark(self,x,y):
         newShark=Shark(x,y,self)
         self.sharkList.append(newShark)
         self.envir.addAgent(newShark)
         self.addCircle(newShark,c.p["newSharkColor"])
 
+    '''
+    agent: agent à supprimer
+    Fonction qui permet de supprimer un agent
+    '''
     def removeAgent(self,agent):
-        if(agent.isFish()):
+        agentType=agent.type()
+        if(agentType=="fish"):
             self.fishList.remove(agent)
         else:
             self.sharkList.remove(agent)
-        self.grid.removeCircle(agent.circle)
+        self.grid.removeCircle(self.circles[agent])
         self.envir.removeAgent(agent)
+        del self.circles[agent]
 
     def run(self):
         self.grid = Display()

@@ -3,7 +3,7 @@ from Core.agent import Agent
 
 
 class Wall(Agent):
-    "L'agent c'est une bille"
+    "Extension de Agent pour l'agent Wall"
     def __init__(self, pPosX, pPosY, pSMA):
         super().__init__(pPosX, pPosY, pSMA)
 

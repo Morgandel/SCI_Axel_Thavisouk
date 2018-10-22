@@ -4,13 +4,12 @@ from random import randint
 
 
 class Shark(Agent):
-    "L'agent c'est une bille"
+    "Extension de Agent pour l'agent Shark"
     def __init__(self, pPosX, pPosY, pSMA):
         super().__init__(pPosX,pPosY, pSMA)
         self.breedTime=randint(1,c.p["sharkBreedTime"])
         self.starveTime=randint(1,c.p["sharkStarveTime"])
         self.dead=False
-        self.canMove=True
 
     def decide(self):
         theMove=self.sma.envir.findFish(self)
@@ -40,17 +39,13 @@ class Shark(Agent):
                     self.sma.addShark(newSharkX,newSharkY)
                     self.breedTime=c.p["sharkBreedTime"]
                 return True
-        #if(self.breedTime==0):
-        #    self.breedTime=c.p["sharkBreedTime"]
+        if(self.breedTime==0):
+           self.breedTime=0
         self.breedTime=self.breedTime+1
         return False
 
-    def isFish(self):
-        return False
-
-    def canMove(self):
-        return True
-
+    def type(self):
+        return "shark"
 
     def canBeEaten(self):
         return False

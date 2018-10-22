@@ -3,7 +3,7 @@ from Core.agent import Agent
 
 
 class Defender(Agent):
-    "L'agent c'est une bille"
+    "Extension de Agent pour l'agent Defender"
     def __init__(self, pPosX, pPosY, pSMA):
         super().__init__(pPosX,pPosY, pSMA)
         self.life=c.p["defenderLife"]

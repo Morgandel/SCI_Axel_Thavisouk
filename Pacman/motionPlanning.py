@@ -36,6 +36,9 @@ class Pacman(SMACore):
         self.distance=None
         self.stop=False
 
+    '''
+    Fonction qui génére un labyrinthe qui utilise le growing tree algorithm et qui crée les murs"
+    '''
     def generateMaze(self):
         cells = []
         intitialCoord = (randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1))
@@ -64,10 +67,6 @@ class Pacman(SMACore):
             self.wallsList.pop(randint(0,len(self.wallsList)-1))
 
 
-
-
-
-
     def update(self,turn):
         if(not self.stop):
             if(c.p["scheduling"]=="sequentiel"):
@@ -86,6 +85,7 @@ class Pacman(SMACore):
                 if(self.avatar.defenderConsumed==4 and self.winner==None):
                     self.envir.removeAgent(self.defender)
                     self.grid.removeCircle(self.circles[self.defender])
+                    del self.circles[self.defender]
                     self.winner=Winner(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1),self)
                     self.envir.addAgent(self.winner)
                     self.addCircle(self.winner, "purple")
@@ -110,12 +110,19 @@ class Pacman(SMACore):
 
             print("fin")
 
-
+    '''
+    Fonction qui retourne Vrai si l'avatar est en état invincible, Faux sinon
+    '''
     def isInvincible(self):
         if(self.avatar.invincibility==0):
             return False
         return True
 
+    '''
+    x: la coordonnée x du centre
+    y: la coordonnée y du centre
+    Fonction qui retourne le voisinage de Von Neumann
+    '''
     def getNeighbors(self,x,y):
         neighbors=[]
         if(x+1<c.p["gridSizeX"]):
@@ -128,7 +135,13 @@ class Pacman(SMACore):
             neighbors.append((x,y-1))
         return neighbors
 
-    def getMinDistance(self,x,y):
+    '''
+    x: la coordonnée x du centre
+    y: la coordonnée y du centre
+    comp: le choix du minimum(min) ou du maximum(max)
+    Retourne les coordonnée de la distance max ou min
+    '''
+    def getMinDistance(self,x,y, comp):
         neighbors=self.getNeighbors(x,y)
         current=neighbors[0]
         minDis=self.distance[current[1]][current[0]]
@@ -138,27 +151,19 @@ class Pacman(SMACore):
             if(agent!=None and agent.type()=='wall'):
                 current=e
                 minDis=newDis
-            elif(newDis!=-1 and minDis>self.distance[e[1]][e[0]]):
-                current=e
-                minDis=newDis
+            else:
+                if(comp=='max'):
+                    minmax=minDis>self.distance[e[1]][e[0]]
+                else:
+                    minmax=maxDis<self.distance[e[1]][e[0]]
+                if(newDis!=-1 and minDis>self.distance[e[1]][e[0]]):
+                    current=e
+                    minDis=newDis
         return current
 
-    def getMaxDistance(self,x,y):
-        neighbors=self.getNeighbors(x,y)
-        current=neighbors[0]
-        maxDis=self.distance[current[1]][current[0]]
-        for e in neighbors[1:]:
-            newDis=self.distance[e[1]][e[0]]
-            agent=self.envir.getAgent(current[0],current[1])
-            if(agent!=None and agent.type()=='wall'):
-                current=e
-                maxDis=newDis
-            elif(newDis!=-1 and maxDis<self.distance[e[1]][e[0]]):
-                current=e
-                maxDis=newDis
-        return current
-
-
+    '''
+    Calcule la distance de chaque cases possible à partir de l'avatar
+    '''
     def dijkstra(self):
         frontier = []
         frontier.append((self.avatar.posX,self.avatar.posY))
@@ -177,6 +182,9 @@ class Pacman(SMACore):
                  distance[next[1]][next[0]] = 1 + distance[current[1]][current[0]]
         self.distance=distance
 
+    '''
+    Fonction qui gère les touches du clavier
+    '''
     def onPress(self,e):
         key=e.keysym.lower()
         if(key=="up"):

@@ -2,14 +2,13 @@ import Core.config as c
 from Core.agent import Agent
 
 class Particules(Agent):
-    "L'agent c'est une bille"
+    "Extension de Agent pour l'agent Particules"
     def __init__(self, pPosX, pPosY, pPasX, pPasY, pSMA):
         super().__init__(pPosX, pPosY, pSMA)
         self.pasX=pPasX
         self.pasY=pPasY
         self.circle=None
         self.rebound=0
-
 
     def decide(self):
         wall=False
@@ -45,9 +44,16 @@ class Particules(Agent):
             return False
         return True
 
+    '''
+    Fonction qui permet à un agent de bouger selon le pas de l'agent
+    '''
     def move(self):
         self.sma.envir.moveAgent(self)
 
+    '''
+    agent: l'agent qui rebondit
+    Fonction qui gére la collision de self et de l'agent passé en paramètre
+    '''
     def agentRebound(self,agent):
         selfX = self.pasX
         selfY = self.pasY

@@ -1,17 +1,17 @@
 from random import randint,shuffle,seed
 from tkinter import *
-from Avatar.avatar import Avatar
-from Avatar.hunter import Hunter
-from Avatar.winner import Winner
-from Avatar.wall import Wall
-from Avatar.defender import Defender
+from Pacman.avatar import Avatar
+from Pacman.hunter import Hunter
+from Pacman.winner import Winner
+from Pacman.wall import Wall
+from Pacman.defender import Defender
 from Core.display import Display
 from Core.environment import Environment
 from Core.smaCore import SMACore
 import Core.config as c
 import numpy as np
 
-class MotionPlanning(SMACore):
+class Pacman(SMACore):
 
     def __init__(self):
         super().__init__()

@@ -1,5 +1,4 @@
 import Core.config as c
-#from Avatar.avatar import Avatar
 from Core.agent import Agent
 
 class Hunter(Agent):

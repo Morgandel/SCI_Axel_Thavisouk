@@ -1,13 +1,13 @@
 {
   "torus": 1,
-  "gridSizeX":100,
-  "gridSizeY":100,
-  "boxSize":5,
+  "gridSizeX":1000,
+  "gridSizeY":1000,
+  "boxSize":1,
   "scheduling":"equitable",
   "nbTicks":-1,
   "grid":0,
-  "trace":1,
+  "trace":0,
   "seed":null,
-  "refresh":333,
-  "nbParticules":1000
+  "refresh":1,
+  "nbParticules":150000
 }

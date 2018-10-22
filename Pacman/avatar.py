@@ -1,6 +1,6 @@
 import Core.config as c
 from Core.agent import Agent
-from Avatar.wall import Wall
+from Pacman.wall import Wall
 import numpy as np
 
 

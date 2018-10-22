@@ -20,8 +20,7 @@ class SMA(SMACore):
 
     def update(self,turn):
         if(c.p["trace"]==1):
-            print("Turn "+str(self.turnCpt))
-            self.turnCpt+=1
+            self.turnCpt=0
         if(c.p["scheduling"]=="sequentiel"):
             agentIte=self.agentList
         elif(c.p["scheduling"]=="random"):
@@ -34,9 +33,11 @@ class SMA(SMACore):
         for agent in agentIte:
             if(agent.decide()):
                 self.grid.moveCircleCoords(self.circles[agent], agent.posX, agent.posY)
+        if(c.p["trace"]==1):
+            print("%10d %10d" % (turn,self.turnCpt))
         if(turn!=-1):
-            turn=turn-1
-        if(turn!=0):
+            turn=turn+1
+        if(turn!=c.p["nbTicks"] or turn==-1):
             self.grid.window.after(c.p["refresh"], self.update,turn)
 
     def run(self):
@@ -45,6 +46,6 @@ class SMA(SMACore):
         if(c.p["nbTicks"]<=0):
             self.update(-1)
         else:
-            self.update(c.p["nbTicks"])
+            self.update(0)
 
         self.grid.mainloop()

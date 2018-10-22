@@ -10,7 +10,7 @@ Pour lancer les différentes parties il faut exécuter le main correspondant:
 Pour particules, lancez:
 - python3 mainParticules.py
 
-Pour Wator, lancer:
+Pour Wator, lancez:
 - python3 mainWator.py
 
 Pour Pacman, lancez:
@@ -20,14 +20,14 @@ Pour Pacman, lancez:
 
 - torus : 1 si torique, 0 sinon
 - gridSizeX : nombre de cases en abscise
-- gridSizeY : nombre de cases en ordonnées
+- gridSizeY : nombre de cases en ordonnée
 - boxSize : la taille des cases
-- scheduling : les ordonnancement(equitable,sequentiel,random)
+- scheduling : les ordonnancements(equitable,sequentiel,random)
 - nbTicks : le nombre de tours (-1 pour infini0)
 - grid : 1 pour afficher la grille, sinon 0
 - trace : 1 pour avoir la trace, 0 sinon
-- seed : mettre à null si pas de seed,
-- refresh : délai entre chaque tours,
+- seed : mettre à null si pas de seed
+- refresh : délai entre chaque tour
 
 ## Diagramme UML
 
@@ -49,18 +49,22 @@ la partie particules est dans le package Particules. Il contient les fichiers su
 
 #### Questions 1
 
-On peut faire tourner sur un ordinateur ayant un processeur Intel® Core™ i5-7200U CPU @ 2.50GHz × 4 et 8 Go de RAM
-120000 particules qui bougent à une fréquence d'environ 1 tour/seconde
+On peut faire tourner, sur un ordinateur ayant un processeur Intel® Core™ i5-7200U CPU @ 2.50GHz × 4 et 8 Go de RAM,
+120000 particules qui bougent à une fréquence d'environ 1,5 tour/seconde
 
 #### Question 2
 
+![alt text](./images/collisions.png)
+
+Cette expérience a été réalisée pour 1000 Particules sur différentes tailles de grilles.
+On peut observer que la différence du nombre de collisions entre la grille de taille 50x50 et 100x100 est énorme. si l'on compare la différence entre la grille de 150x150 à celle de 200x200 on voit qu'il y a une différence mais pas aussi énorme. On y a pourtant ajouté plus de cases pour la 2ème comparaison que la 1ère.(7500 contre 17500)
 
 #### Question 3
-Dans le cas où l'on ne fait rien lorsque une bille est présente, on supprime les particules où l'on veut aller. si l'on utilise une seuxiéme grille tampon pour stocker les particules qui se font supprimer on peut contourner le problème et dans ce cas il n'y a plus aucune collision.
+Dans le cas où l'on ne fait rien lorsqu'une particule est présente, on supprime les particules où l'on veut aller. si l'on utilise une deuxième grille tampon pour stocker les particules qui se font supprimer on peut contourner le problème et dans ce cas il n'y a plus aucune collision.
 
-Dans le cas où j'inverse la direction lors d'une collision, j'ai eu d'abord des problèmes où certaines particules supprimaient d'autres qui étaient dans l'environnement, mais en utilisant la même solution qu'en ne faisant rien on obtiens des mouvement assez étrange car les particules que l'on rencontre ne sont donc pas du tout affectées par les collisions qui n'ont pas été réalisée par eux.
+Dans le cas où j'inverse la direction lors d'une collision, j'ai eu d'abord des problèmes où certaines particules supprimaient d'autres qui étaient dans l'environnement, mais en utilisant la même solution qu'en ne faisant rien on obtiens des mouvements assez étranges car les particules que l'on rencontre ne sont donc pas du tout affectées par les collisions qui n'ont pas été réalisée par eux.
 
-Le cas où l'on échange les pas des deux particules qui collisionnent est le comportement qui donne le meilleur rendu car en effet les deux particules sont dans ce cas affectée par la collision et il n'y a plus besoin de tableau tampons car il n'est plus possible d'avoir deux particules différentes sur la même case.
+Le cas où l'on échange les pas des deux particules qui collisionnent est le comportement qui donne le meilleur rendu car en effet les deux particules sont dans ce cas affecté par la collision et il n'y a plus besoin de tableau tampons car il n'est plus possible d'avoir deux particules différentes sur la même case.
 
 
 ## Partie Wator
@@ -76,11 +80,11 @@ la partie Wator est dans le package Wator. Il contient les fichiers suivants:
 - watorEnvi.py: l'environement de Wator
 
 ### Config
-- waterColor : La couleur du background
+- waterColor : la couleur du background
 - fishColor : la couleur du poisson
 - sharkColor : la couleur des requins
 - newFishColor : la couleur des nouveaux poissons
-- newSharkColor :la couleur des nouveaux requins
+- newSharkColor : la couleur des nouveaux requins
 - fishBreedTime : temps de fécondation pour les poissons
 - sharkBreedTime : temps de fécondation pour les requins
 - sharkStarveTime : temps avant de mourir de faim pour les requins,
@@ -90,16 +94,18 @@ la partie Wator est dans le package Wator. Il contient les fichiers suivants:
 ### Questions
 
 #### Question 1
-Il est préférable d'initialiser les différents compteurs de manière aléatoire car lorsque l'on fixe ces compteurs aux même valeurs on obtiens des poissons et leurs enfants qui naissent et qui meurent en même temps. On peut le voir par la croissance en bloc sur la grille lorsque l'on le lance ainsi.
+Il est préférable d'initialiser les différents compteurs de manière aléatoire car lorsque l'on fixe ces compteurs aux même valeurs, on obtient des poissons et leurs enfants qui naissent et qui meurent en même temps. On peut le voir par la croissance en bloc sur la grille lorsque l'on le lance ainsi.
 
 #### Question 2
-Lorsque l'on fixe une action par tick on bloque lorsque la grille est remplie de poissons car il ne peuvent plus se reproduire car les poissons se seront reproduits là où les requins étaient avant
+Lorsque l'on fixe une action par tick on bloque lorsque la grille est remplie de poissons car ils ne peuvent plus se reproduire car les poissons se seront reproduits là où les requins étaient avant
 
-Se reproduire en bougeant donne le meilleur résultat, ils donnent aux requins une meilleure survie et les poissons se reproduisent assez rapidement aussi, on voit sur la courbe d'evolution que les poissons ont l'air de se stabiliser un peu mieux sur la fin
+Se reproduire en bougeant donne le meilleur résultat, ils donnent aux requins une meilleure survie et les poissons se reproduisent assez rapidement aussi, on voit sur la courbe d'évolution que les poissons ont l'air de se stabiliser un peu mieux sur la fin
+
 ![alt text](./images/evolution_bouge.png)
 ![alt text](./images/fish_shark_bouge.png)
 
 Se reproduire en mangeant ne permet pas aux poissons de stabiliser leurs populations comme le faisait le comportement précédent
+
 ![alt text](./images/evolution_mange.png)
 ![alt text](./images/fish_shark_mange.png)
 
@@ -119,11 +125,11 @@ la partie Pacman est dans le package Pacman. Il contient les fichiers suivants:
 
 ### Config
 
-- speedHunter : nombre de tour nécessaire pour le mouvement d'un hunter
-- speedAvatar : nombre de tour nécessaire pour le mouvement de l'avatar
+- speedHunter : nombre de tours snécessaires pour le mouvement d'un hunter
+- speedAvatar : nombre de tours nécessaires pour le mouvement de l'avatar
 - nbHunter: nombre de hunter
 - nbWall : pourcentage de mur, ignoré si maze à 1
-- defenderLife : nombres de tours avant la disparition du defender,
+- defenderLife : nombre de tours avant la disparition du defender,
 - invincibility : nombre de tour de l'invincibilité,
 - maze : 1 pour obtenir un labyrinthe, 0 sinon
 - erosionLabyrinthe : un nombre entre 0 et 1 afin d'éroder le labyrinthe pour ne pas avoir qu'un seul chemin

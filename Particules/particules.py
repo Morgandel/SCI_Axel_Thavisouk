@@ -18,8 +18,6 @@ class Particules(Agent):
                     self.pasX=bounds[0]
                 if(bounds[1]!=0):
                     self.pasY=bounds[1]
-                if(c.p["trace"]==1):
-                    print("Agent;"+str(self.posX)+";"+str(self.posY))
                 return False
         else:
             newPos=self.sma.envir.torus(self.posX+self.pasX, self.posY+self.pasY)
@@ -37,6 +35,8 @@ class Particules(Agent):
             self.move()
             return True
         elif(self!=dest):
+            if(c.p["trace"]==1):
+                self.sma.turnCpt+=1
             self.agentRebound(dest)
             self.sma.changeColor(self, "grey")
             self.sma.changeColor(dest, "grey")
@@ -60,6 +60,3 @@ class Particules(Agent):
         self.pasY=agent.pasY
         agent.pasX = selfX
         agent.pasY = selfY
-        if(c.p["trace"]==1):
-            print("Agent;"+str(self.posX)+";"+str(self.posY))
-            print("Agent;"+str(agent.posX)+";"+str(agent.posY))

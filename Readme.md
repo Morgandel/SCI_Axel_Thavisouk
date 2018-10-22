@@ -54,5 +54,5 @@ Se reproduire en bougeant donne le meilleur résultat, ils donnent aux requins u
 ![alt text](./images/fish_shark_bouge.png)
 
 Se reproduire en mangeant ne permet pas aux poissons de stabiliser leurs populations comme le faisait le comportement précédent
-![alt text](./images/mange.png)
+![alt text](./images/evolution_mange.png)
 ![alt text](./images/fish_shark_mange.png)

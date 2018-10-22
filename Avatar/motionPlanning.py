@@ -14,6 +14,7 @@ import numpy as np
 class MotionPlanning(SMACore):
 
     def __init__(self):
+        super().__init__()
         if(c.p["seed"]!=None):
             seed(c.p["seed"])
         self.avatar=Avatar(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1),self)
@@ -32,7 +33,6 @@ class MotionPlanning(SMACore):
         self.dijkstra()
         self.envir.addAgents(self.huntersList,c.p["nbHunter"])
         self.envir.addAgent(self.defender)
-        self.grid=None
         self.distance=None
         self.stop=False
 
@@ -81,14 +81,14 @@ class MotionPlanning(SMACore):
                 agentIte=self.agentList
             for agent in agentIte:
                 if(agent.decide()):
-                    self.grid.moveCircleCoords(agent.circle, agent.posX, agent.posY)
+                    self.grid.moveCircleCoords(self.circles[agent], agent.posX, agent.posY)
             if(self.defender.dead):
                 if(self.avatar.defenderConsumed==4 and self.winner==None):
                     self.envir.removeAgent(self.defender)
-                    self.grid.removeCircle(self.defender.circle)
+                    self.grid.removeCircle(self.circles[self.defender])
                     self.winner=Winner(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1),self)
                     self.envir.addAgent(self.winner)
-                    self.grid.drawCircle(self.winner, "purple")
+                    self.addCircle(self.winner, "purple")
                 elif(self.avatar.defenderConsumed<4):
                     self.defender.life=c.p["defenderLife"]
                     self.defender.dead=False
@@ -96,7 +96,7 @@ class MotionPlanning(SMACore):
                     while(self.envir.getAgent(coord[0],coord[1])!=None):
                         coord=[randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1)]
                     self.envir.moveAgentCoord(self.defender,coord)
-                    self.grid.moveCircleCoords(self.defender.circle, self.defender.posX, self.defender.posY)
+                    self.grid.moveCircleCoords(self.circles[self.defender], self.defender.posX, self.defender.posY)
                 elif(self.avatar.defenderConsumed==5):
                     print("Gagné !")
 
@@ -115,12 +115,6 @@ class MotionPlanning(SMACore):
         if(self.avatar.invincibility==0):
             return False
         return True
-
-    def changeColor(self,circle,color):
-        self.grid.changeColor(circle,color)
-
-    def moveCircle(self,circle,offsetX,offsetY):
-        self.grid.moveCircle(circle,offsetX,offsetY)
 
     def getNeighbors(self,x,y):
         neighbors=[]
@@ -225,9 +219,9 @@ class MotionPlanning(SMACore):
     def run(self):
         self.grid = Display()
         self.grid.drawRectangles(self.wallsList, "brown")
-        self.grid.drawCircles([self.avatar], "blue")
-        self.grid.drawCircles([self.defender], "black")
-        self.grid.drawCircles(self.huntersList, "red")
+        self.initializeCircles([self.avatar], "blue")
+        self.initializeCircles([self.defender], "black")
+        self.initializeCircles(self.huntersList, "red")
         self.grid.listen(self.onPress)
         if(c.p["nbTicks"]<=0):
             self.update(-1)

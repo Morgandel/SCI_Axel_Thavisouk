@@ -25,22 +25,15 @@ class Display:
             self.canvas.create_line(self.g_width,self.g_height,1,self.g_height)
             self.canvas.create_line(self.g_width,self.g_height,self.g_width,1)
 
-    def drawCircles(self,agentList,color):
-        for agent in agentList:
-            x = agent.posX*c.p["boxSize"]
-            y = agent.posY*c.p["boxSize"]
-            agent.circle = self.canvas.create_oval(x, y, x+c.p["boxSize"], y+c.p["boxSize"], outline=color, fill=color)
-
     def drawRectangles(self,agentList,color):
         for agent in agentList:
             x = agent.posX*c.p["boxSize"]
             y = agent.posY*c.p["boxSize"]
             agent.circle = self.canvas.create_rectangle(x, y, x+c.p["boxSize"], y+c.p["boxSize"], outline=color, fill=color)
 
-    def drawCircle(self,agent,color):
-        x = agent.posX*c.p["boxSize"]
-        y = agent.posY*c.p["boxSize"]
-        agent.circle = self.canvas.create_oval([x, y, x+c.p["boxSize"], y+c.p["boxSize"]], outline=color, fill=color)
+    def drawCircle(self,x,y,color):
+        return self.canvas.create_oval([x, y, x+c.p["boxSize"], y+c.p["boxSize"]], outline=color, fill=color)
+
     def changeColor(self,circle,color):
         self.canvas.itemconfigure(circle,outline=color, fill=color)
 

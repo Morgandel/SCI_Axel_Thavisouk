@@ -10,12 +10,12 @@ from Core.smaCore import SMACore
 class SMA(SMACore):
 
     def __init__(self):
+        super().__init__()
         if(c.p["seed"]!=None):
             seed(c.p["seed"])
         self.agentList = np.array([Particules(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1), randint(-1,1), randint(-1,1),self) for i in range (c.p["nbParticules"])])
         self.envir = Environment()
         self.envir.addAgents(self.agentList,c.p["nbParticules"])
-        self.grid=None
         self.turnCpt=0
 
     def update(self,turn):
@@ -33,7 +33,7 @@ class SMA(SMACore):
             agentIte=self.agentList
         for agent in agentIte:
             if(agent.decide()):
-                self.grid.moveCircleCoords(agent.circle, agent.posX, agent.posY)
+                self.grid.moveCircleCoords(self.circles[agent], agent.posX, agent.posY)
         if(turn!=-1):
             turn=turn-1
         if(turn!=0):
@@ -41,7 +41,7 @@ class SMA(SMACore):
 
     def run(self):
         self.grid = Display()
-        self.grid.drawCircles(self.agentList, "red")
+        self.initializeCircles(self.agentList, "red")
         if(c.p["nbTicks"]<=0):
             self.update(-1)
         else:

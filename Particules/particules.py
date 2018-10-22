@@ -40,8 +40,8 @@ class Particules(Agent):
             return True
         elif(self!=dest):
             self.agentRebound(dest)
-            self.sma.changeColor(self.circle, "grey")
-            self.sma.changeColor(dest.circle, "grey")
+            self.sma.changeColor(self, "grey")
+            self.sma.changeColor(dest, "grey")
             return False
         return True
 

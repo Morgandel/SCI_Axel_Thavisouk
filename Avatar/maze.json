@@ -1,7 +1,7 @@
  {
   "torus": 0,
-  "gridSizeX":100,
-  "gridSizeY":100,
+  "gridSizeX":50,
+  "gridSizeY":50,
   "boxSize":7,
   "scheduling":"equitable",
   "nbTicks":-1,
@@ -11,11 +11,11 @@
   "refresh":100,
   "speedHunter":5,
   "speedAvatar":1,
-  "nbHunter":5,
+  "nbHunter":0,
   "nbWall":0,
   "defenderLife":200,
   "invincibility":30,
   "maze":1,
-  "erosionLabyrinthe":0.2
+  "erosionLabyrinthe":0.8
 
 }

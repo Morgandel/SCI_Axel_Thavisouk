@@ -9,8 +9,9 @@ import numpy as np
 import Core.config as c
 
 class Wator(SMACore):
-
+    
     def __init__(self):
+        super().__init__()
         if(c.p["seed"]!=None):
             seed(c.p["seed"])
         self.sharkList = [Shark(randint(0,c.p["gridSizeX"]-1), randint(0,c.p["gridSizeY"]-1), self) for i in range (c.p["nbShark"])]
@@ -19,7 +20,6 @@ class Wator(SMACore):
         self.envir = WatorEnvi()
         self.envir.addAgents(self.sharkList,c.p["nbShark"])
         self.envir.addAgents(self.fishList,c.p["nbFish"])
-        self.grid=None
 
     def update(self,turn):
         if(c.p["trace"]==1):
@@ -37,40 +37,34 @@ class Wator(SMACore):
 
         for agent in agentIte:
             if(agent.decide()):
-                self.grid.moveCircleCoords(agent.circle, agent.posX, agent.posY)
+                self.grid.moveCircleCoords(self.circles[agent], agent.posX, agent.posY)
         for fish in self.fishList:
             if(fish.dead):
                 self.fishList.remove(fish)
                 self.envir.removeAgent(fish)
-                self.grid.removeCircle(fish.circle)
+                self.grid.removeCircle(self.circles[fish])
         for shark in self.sharkList:
             if(shark.dead):
                 self.sharkList.remove(shark)
                 self.envir.removeAgent(shark)
-                self.grid.removeCircle(shark.circle)
+                self.grid.removeCircle(self.circles[shark])
 
         if(turn!=-1):
             turn=turn+1
         if(turn!=c.p["nbTicks"] or turn==-1):
             self.grid.window.after(c.p["refresh"], self.update,turn)
 
-    def changeColor(self,circle):
-        self.grid.changeColor(circle)
-
-    def moveCircle(self,circle,offsetX,offsetY):
-        self.grid.moveCircle(circle,offsetX,offsetY)
-
     def addFish(self,x,y):
         newFish=Fish(x, y, self)
         self.fishList.append(newFish)
         self.envir.addAgent(newFish)
-        self.grid.drawCircle(newFish,c.p["newFishColor"])
+        self.addCircle(newFish,c.p["newFishColor"])
 
     def addShark(self,x,y):
         newShark=Shark(x,y,self)
         self.sharkList.append(newShark)
         self.envir.addAgent(newShark)
-        self.grid.drawCircle(newShark,c.p["newSharkColor"])
+        self.addCircle(newShark,c.p["newSharkColor"])
 
     def removeAgent(self,agent):
         if(agent.isFish()):
@@ -82,8 +76,8 @@ class Wator(SMACore):
 
     def run(self):
         self.grid = Display()
-        self.grid.drawCircles(self.fishList, c.p["fishColor"])
-        self.grid.drawCircles(self.sharkList, c.p["sharkColor"])
+        self.initializeCircles(self.fishList, c.p["fishColor"])
+        self.initializeCircles(self.sharkList, c.p["sharkColor"])
         if(c.p["nbTicks"]<=0):
             self.update(-1)
         else:

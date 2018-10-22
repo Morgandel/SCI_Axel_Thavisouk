@@ -22,7 +22,7 @@ class Avatar(Agent):
             if(self.invincibility>0):
                 self.invincibility-=1
                 if(self.invincibility==0):
-                    self.sma.changeColor(self.circle,"blue")
+                    self.sma.changeColor(self,"blue")
             if(c.p["torus"]==0):
                 oob=self.sma.envir.isOutOfBound(self.posX+self.dirX, self.posY+self.dirY)
                 if(oob):
@@ -58,7 +58,7 @@ class Avatar(Agent):
                 dest.dead=True
                 self.defenderConsumed+=1
                 self.invincibility=c.p["invincibility"]
-                self.sma.changeColor(self.circle,"pink")
+                self.sma.changeColor(self,"pink")
                 self.sma.envir.moveAgentCoord(self, [self.posX+self.dirX, self.posY+self.dirY])
             elif(dest.type()=="winner"):
                 self.defenderConsumed+=1

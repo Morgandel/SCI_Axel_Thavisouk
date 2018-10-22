@@ -1,8 +1,8 @@
-from sma import SMA
-from environment import Environment
-import config as c
+from Particules.sma import SMA
+from Core.environment import Environment
+import Core.config as c
 
 if __name__ == '__main__':
-    c.initialize()
+    c.initialize("Particules/parameter.json")
     instance=SMA()
     instance.run()

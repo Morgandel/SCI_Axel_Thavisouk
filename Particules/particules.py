@@ -1,5 +1,5 @@
-import config as c
-from Core.agent import Core.Agent
+import Core.config as c
+from Core.agent import Agent
 
 class Particules(Agent):
     "L'agent c'est une bille"
@@ -7,7 +7,6 @@ class Particules(Agent):
         super().__init__(pPosX, pPosY, pSMA)
         self.pasX=pPasX
         self.pasY=pPasY
-        self.sma=pSMA
         self.circle=None
         self.rebound=0
 
@@ -27,12 +26,6 @@ class Particules(Agent):
         else:
             newPos=self.sma.envir.torus(self.posX+self.pasX, self.posY+self.pasY)
             wall=newPos[0]!=self.posX+self.pasX or newPos[1]!=self.posY+self.pasY
-            offsetX=self.pasX
-            offsetY=self.pasY
-            if(self.posX+self.pasX!=newPos[0]):
-                offsetX=newPos[0]-self.posX
-            if(self.posY+self.pasY!=newPos[1]):
-                offsetY=newPos[1]-self.posY
 
         if(c.p["torus"]==1):
             dest=self.sma.envir.getAgent(newPos[0],newPos[1])
@@ -42,14 +35,13 @@ class Particules(Agent):
         if(dest==None):
             if(wall):
                 self.sma.envir.moveAgentCoord(self, newPos)
-                this.sma.moveCircle(circle, offsetX, offsetY)
-                return False
+                return True
             self.move()
             return True
         elif(self!=dest):
             self.agentRebound(dest)
-            self.sma.changeColor(self.circle)
-            self.sma.changeColor(dest.circle)
+            self.sma.changeColor(self.circle, "grey")
+            self.sma.changeColor(dest.circle, "grey")
             return False
         return True
 

@@ -4,10 +4,11 @@ from Wator.watorEnvi import WatorEnvi
 from random import randint,shuffle,seed
 from tkinter import *
 from Core.display import Display
+from Core.smaCore import SMACore
 import numpy as np
 import Core.config as c
 
-class Wator:
+class Wator(SMACore):
 
     def __init__(self):
         if(c.p["seed"]!=None):

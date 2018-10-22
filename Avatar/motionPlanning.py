@@ -4,13 +4,14 @@ from Avatar.avatar import Avatar
 from Avatar.hunter import Hunter
 from Avatar.winner import Winner
 from Avatar.wall import Wall
+from Avatar.defender import Defender
 from Core.display import Display
 from Core.environment import Environment
-from Avatar.defender import Defender
+from Core.smaCore import SMACore
 import Core.config as c
 import numpy as np
 
-class MotionPlanning:
+class MotionPlanning(SMACore):
 
     def __init__(self):
         if(c.p["seed"]!=None):

@@ -2,7 +2,7 @@ import Core.config as c
 
 
 class Agent:
-    "L'agent c'est une bille"
+    "Classe abstraite d'un agent"
     def __init__(self, pPosX, pPosY, pSMA):
         self.posX=pPosX
         self.posY=pPosY

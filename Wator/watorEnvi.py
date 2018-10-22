@@ -64,15 +64,3 @@ class WatorEnvi(Environment):
                 if(not outOfBounds):
                     if(self.envir[y][x]!=None):
                         self.envir[y][x].canMove=True
-
-    def torus(self, posX, posY):
-        pos=[posX,posY]
-        if(posX < 0):
-            pos[0]=c.p["gridSizeX"]-1
-        elif(posX >= c.p["gridSizeX"]):
-            pos[0]=0
-        if(posY < 0):
-            pos[1]=c.p["gridSizeY"]-1
-        elif(posY >= c.p["gridSizeY"]):
-            pos[1]=0
-        return pos

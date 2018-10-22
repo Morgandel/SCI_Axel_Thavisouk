@@ -1,7 +1,7 @@
 {
   "torus": 1,
-  "gridSizeX":10,
-  "gridSizeY":10,
+  "gridSizeX":100,
+  "gridSizeY":100,
   "boxSize":5,
   "scheduling":"equitable",
   "nbTicks":-1,
@@ -9,5 +9,5 @@
   "trace":1,
   "seed":null,
   "refresh":333,
-  "nbParticules":1
+  "nbParticules":1000
 }

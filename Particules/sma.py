@@ -21,7 +21,7 @@ class SMA(SMACore):
     def update(self,turn):
         if(c.p["trace"]==1):
             print("Turn "+str(self.turnCpt))
-            self.turnCpt++
+            self.turnCpt+=1
         if(c.p["scheduling"]=="sequentiel"):
             agentIte=self.agentList
         elif(c.p["scheduling"]=="random"):

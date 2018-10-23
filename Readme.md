@@ -22,12 +22,12 @@ Pour créer les 2 graphes du TP Wator, il faut activer la trace et le piper dans
 Il ne reste plus qu'à exécuter la commande suivante:
 
 - gnuplot result.plt
-Python n'est pas le meilleur langage pour faire ça.
+
 Si l'on cherche à aligner les 2 courbes on peut ajuster la ligne:
 
 - set y2range [0:3200]
 
-ici c'est le 3200
+ici c'est le 3200 qu'il faut ajuster si nécessaire
 
 Pour créer les graphes pour particules, il faut piper le résultat de la trace de particules dans des fichier.
 dans le fichier particules.plt il faut modifier la dernière lignes pour correspondres à vos fichier créé.
@@ -35,6 +35,7 @@ dans le fichier particules.plt il faut modifier la dernière lignes pour corresp
 Après le plot de la dernière ligne on peut rajouter de multiples lignes
 
 - '50x50.data' using 1:2 with lines title '50x50'
+
 sur lesquels il faut modifier ce qui est entre quote.(le nom du fichier et le titre)
 
 

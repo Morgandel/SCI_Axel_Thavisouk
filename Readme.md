@@ -16,6 +16,28 @@ Pour Wator, lancez:
 Pour Pacman, lancez:
 - python3 mainPacman.py
 
+## Génération des expérience
+
+Pour créer les 2 graphes du TP Wator, il faut activer la trace et le piper dans le fichier poisson.data situé dans le dossier Expe.
+Il ne reste plus qu'à exécuter la commande suivante:
+
+- gnuplot result.plt
+Python n'est pas le meilleur langage pour faire ça.
+Si l'on cherche à aligner les 2 courbes on peut ajuster la ligne:
+
+- set y2range [0:3200]
+
+ici c'est le 3200
+
+Pour créer les graphes pour particules, il faut piper le résultat de la trace de particules dans des fichier.
+dans le fichier particules.plt il faut modifier la dernière lignes pour correspondres à vos fichier créé.
+
+Après le plot de la dernière ligne on peut rajouter de multiples lignes
+
+- '50x50.data' using 1:2 with lines title '50x50'
+sur lesquels il faut modifier ce qui est entre quote.(le nom du fichier et le titre)
+
+
 ## Eléments de configurations en communs
 
 - torus : 1 si torique, 0 sinon
@@ -109,6 +131,7 @@ Se reproduire en mangeant ne permet pas aux poissons de stabiliser leurs populat
 ![alt text](./images/evolution_mange.png)
 ![alt text](./images/fish_shark_mange.png)
 
+
 ## Partie Pacman
 
 ### Package
@@ -140,3 +163,9 @@ la partie Pacman est dans le package Pacman. Il contient les fichiers suivants:
 - Les touches O et P permettent d'accélérer et décélérer l'Avatar
 - Les touches W et X permettent d'accélérer et décélérer le jeu
 - La touche Espace permet de mettre en pause le jeu et de le reprendre
+
+
+### les limites et les difficultées rencontrée
+
+J'ai été énormément limité par le langage python, pour ce genre d'application, il a énormément de mal sur la gestion de la mémoire, les vitesse des accés.
+J'ai eu énormément de problème lors de la conception objet. Première fois que j'en fait dans ce langage.
